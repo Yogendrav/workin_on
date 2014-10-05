@@ -1,0 +1,17 @@
+= title("Edit-#{@admin.name.humanize}")
+
+%div.container
+  %div.col-md-6
+    = form_for(@admin, url: admin_path(@admin), html: { method: :put, role: "form" }) do |f|
+      %div
+        = render partial: 'shared/error', locals: {subject: @admin, subject_name: "admin"}
+        
+      %div.center-block
+        = render partial: 'devise/shared/save_reset_buttons', locals: {f: f}
+        - if @admin == current_admin
+          = link_to "Reset Password", password_reset_admin_path(@admin), class: "btn btn-md btn-default"
+
+      %br
+      %div.col-md-6
+        = render partial: 'devise/registrations/form', locals: {f: f, user: @admin}
+        = render partial: 'admins/form', locals: {f: f, user: @admin}

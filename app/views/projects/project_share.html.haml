@@ -1,0 +1,34 @@
+= title("Project")
+.portlet.box.green
+  .portlet-title
+    .caption
+      WARNING: Partner will become a sub on this project
+  .portlet-body.form
+    = form_tag share_projects_path(project_id: params[:project_id]), method: "POST", class: "form-horizontal", role: "form" do
+      .form-body
+        .col-md-offset-1
+          .form-group
+            %label.control-label.col-md-3 Select Partner
+            .col-md-4
+              = select_tag("subcontractor_id", options_for_select(select_company_partner), class: "form-control select2-drop-down")
+            .col-md-2
+              = submit_tag "Share", class: "btn btn-primary"
+  .portlet-body.flip-scroll
+    %table.table.table-bordered.table-striped.table-condensed.flip-content
+      %thead.flip-content
+        %tr
+          %th
+            %b Name
+          %th
+            %b Workers
+          %th
+            %b Remove
+        %tbody
+          - ProjectShare.all.map do |project_share|
+            %tr
+              %td
+                = project_share.subcontractor.company.name
+              %td
+                = project_share.subcontractor.company.workers.size
+              %td
+                = link_to "Delete", destroy_project_shared_projects_path(project_share_id: project_share.id, project_id: params[:project_id]), data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"

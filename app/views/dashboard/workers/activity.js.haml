@@ -1,0 +1,14 @@
+$(".center-content a").removeClass('active');
+- if @events.present?
+  var uri = "#{dashboard_worker_activity_path(@events.first.worker, yyyy_mm_dd(params[:date]), page: @events.next_page)}"
+  $(".row").show();
+  $("#add_more_acitivities").attr("href", uri);
+  $("tbody#activity").html("#{j(render partial: 'dashboard/teams/event', collection: @events)}");
+  $("tbody#short_activity").html("#{short_activity(@events)}");
+  - if @events.next_page
+    $("#add_more_acitivities").removeClass("disabled");
+  - else
+    $("#add_more_acitivities").addClass("disabled");
+
+- else
+  $(".row").hide();

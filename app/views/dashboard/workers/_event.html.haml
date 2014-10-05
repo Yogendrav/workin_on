@@ -1,0 +1,7 @@
+%tr{class: "#{cycle('active', 'success', 'warning', 'danger')}"}
+  %td= event.event_type.name.humanize
+  %td= yyyy_mm_dd(event.created_at)
+  %td= event.created_at.strftime("%I:%M%p")
+  %td= event.project.name.humanize
+  %td= event.project.active_radius
+  %td= link_to "Edit", dashboard_worker_edit_events_timesheet_path(worker, event), class: 'btn btn-danger btn-xs'

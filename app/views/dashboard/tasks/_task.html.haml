@@ -1,0 +1,46 @@
+.col-md-3
+  = f.label :project, class: "bold"
+  = f.select :project_id, current_company.projects.pluck(:name, :id), {}, class: "input-medium select2-drop-down form-control"
+.clearfix
+%br
+
+.col-md-3
+  = f.label :duration, class: "bold"
+  = f.text_field :duration, class: "form-control input-medium timepicker timepicker-24"
+.clearfix
+%br
+
+.col-md-3
+  = f.label :end_date, class: "bold"
+  .input-group.input-medium.date{"data-date-format"=>"yyyy-mm-dd"}
+    = f.text_field :end_date, readonly: true, class: "form-control datepicker"
+.clearfix
+%br
+
+= f.hidden_field :company_id
+= hidden_field_tag :date, params[:date]
+
+.col-md-4
+  = f.label :copy_to, class: "bold"
+  .col-md-offset-1
+    = f.radio_button :copy_to_type, "next_days"
+    = f.label :next
+    = f.text_field :next_days, type: "number", min: 0, max: 30, class: "input-small"
+    = f.label :days
+    %br
+    = f.radio_button :copy_to_type, "every_day_this_week"
+    = f.label :every_day_this_week
+    %br
+    = f.radio_button :copy_to_type, "same_weekday_each_week"
+    = f.label :same_weekday_each_week
+    %br
+    = f.radio_button :copy_to_type, "every_day_this_month"
+    = f.label :every_day_this_month
+.clearfix
+%br
+:javascript
+  $(".datepicker").datepicker();
+  $('.timepicker').timepicker({
+    showMeridian: false,
+    defaultTime: '00:00'
+  });

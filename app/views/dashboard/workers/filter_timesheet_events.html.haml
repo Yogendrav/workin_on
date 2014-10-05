@@ -1,0 +1,27 @@
+= title("#{@worker.name.humanize} - timesheet events")
+
+.col-md-12
+  .portlet.box.green
+    .portlet-title
+      .caption
+        %i.fa.fa-calendar-o
+        #{@worker.name.humanize} Timesheet events
+    .portlet-body
+      .col-md-12
+        .table-scrollable
+          %table.table.table-stripped.table-hover
+            %tbody#activity
+              %tr.bold.btn-warning
+                %td Event
+                %td Date
+                %td Time
+                %td Project
+                %td Distance(In miles)
+                %td
+
+              = render partial: 'event', collection: @events, locals: {worker: @worker}
+        = will_paginate(@events, params: request.params, class: "btn btn-xs")
+      .clearfix
+      .center-content
+        = link_to "Back", dashboard_worker_timesheet_events_path(@worker), class: "btn btn-md btn-danger"
+.clearfix

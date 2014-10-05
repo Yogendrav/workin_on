@@ -1,0 +1,39 @@
+- if current_admin
+  .page-sidebar-wrapper
+    .page-sidebar.navbar-collapse.collapse
+      %ul.page-sidebar-menu{"data-auto-scroll" => "true", "data-slide-speed" => "200"}
+        %br
+        %li{:class => "#{'active' if params[:controller] == 'companies'}"}
+          %a{:href => companies_path}
+            %i.fa.fa-info
+            %span.title Company Info
+        %li{:class => "#{'active' if params[:controller] == 'settings'}"}
+          %a{:href => settings_path}
+            %i.fa.fa-cog
+            %span.title Settings
+        %li{:class => "#{'active' if params[:controller] == 'teams'}"}
+          %a{:href => teams_path}
+            %i.fa.fa-users
+            %span.title Teams
+        %li{:class => "#{'active' if(params[:controller] == 'admins' || params[:controller] == 'workers' || params[:controller] == 'registrations')}"}
+          %a{:href => admins_path}
+            %i.fa.fa-users
+            %span.title Users
+        %li{:class => "#{'active' if params[:controller] == 'projects'}"}
+          %a{:href => projects_path}
+            %i.fa.fa-paperclip
+            %span.title Projects
+        %li{:class => "#{'active' if params[:controller] == 'skills'}"}
+          %a{:href => skills_path}
+            %i.fa.fa-puzzle-piece
+            %span.title Skills
+        %li{:class => "#{'active' if params[:controller] == 'partners'}"}
+          %a{:href => partners_path}
+            %i.fa.fa-child
+            %span.title Partners
+        %li
+          %a{:href => "#Billing_path"}
+            %i.fa.fa-credit-card
+            %span.title Billing
+        %li
+          = link_to "Create Event(Testing purpose)", dashboard_worker_event_new_page_path(Worker.first || 1)

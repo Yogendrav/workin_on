@@ -1,0 +1,25 @@
+= label_tag "Admin Team"
+
+%fieldset.scheduler-border
+  %legend.scheduler-border Email Alerts
+  %div.checkbox
+    = f.check_box :email_al_over_time
+    = label_tag "Overtime"
+    = f.check_box :email_al_late_clock_in
+    = label_tag "Late Clock-in"
+  %div.checkbox
+    = f.check_box :email_al_late_clock_out
+    = label_tag "Late Clock-out"
+    = f.check_box :email_al_away_from_project
+    = label_tag "Away from project"
+  %div.checkbox
+    = f.check_box :email_al_clock_in
+    = label_tag "Clock-in"
+    = f.check_box :email_al_clock_out
+    = label_tag "Clock-out"
+
+%p
+  Select Teams for Alerts
+  =  collection_select(:teams, :id, team_list_for_email_alert, :id, :name, {selected: selected_teams(user)}, {multiple:true, size: 8, class: 'form-control'})
+
+  = render partial: 'devise/shared/save_reset_buttons', locals: {f: f}

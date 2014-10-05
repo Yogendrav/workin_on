@@ -1,0 +1,19 @@
+= title("Edit-#{@worker.name.humanize}")
+
+%div.container
+  %div.col-md-6
+    = form_for(@worker, url: worker_path(@worker), html: { method: :put, role: "form" }) do |f|
+      %div
+        = render partial: 'shared/error', locals: {subject: @worker, subject_name: "worker"}
+        
+      %div.center-block
+        = render partial: 'devise/shared/save_reset_buttons', locals: {f: f}
+        = link_to "Reset Password", password_reset_worker_path(@worker), class: "btn btn-md btn-default"
+        = link_to "Send Info", send_info_worker_path(@worker), class: "btn btn-md btn-default"
+
+      %br
+      %div.col-md-6
+        = render partial: 'devise/registrations/form', locals: {f: f, user: @worker}
+        %div
+          = render partial: 'devise/registrations/worker_fields_form', locals: {f: f, resource: @worker}
+          = render partial: 'devise/shared/save_reset_buttons', locals: {f: f}

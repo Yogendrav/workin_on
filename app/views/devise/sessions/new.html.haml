@@ -1,0 +1,39 @@
+= title("Sign in")
+.logo
+  = image_tag "logo1.png", size: "200x70"
+
+.content
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-signin login-form", role: "form"} ) do |f|
+    = devise_error_messages!
+    %h3.form-title Please sign in
+    .form-group
+      / %label.control-label.visible-ie8.visible-ie9 Email
+      .input-icon
+        %i.fa.fa-user
+        = f.email_field :email, autofocus: true, class: "form-control placeholder-no-fix", placeholder: "Email address", required: true
+
+    .form-group
+      / %label.control-label.visible-ie8.visible-ie9 Password
+      .input-icon
+        %i.fa.fa-lock
+        = f.password_field :password, autocomplete: "off", class: "form-control placeholder-no-fix form-control", placeholder: "Password", required: true
+    .form-actions
+      - if devise_mapping.rememberable?
+        .checkbox
+          %label
+            = f.check_box :remember_me
+            Remember me
+      %button.btn.green.pull-right{:type => "submit"}
+        Login
+        %i.m-icon-swapright.m-icon-white
+    .forget-password
+      %h4 Forgot your password ?
+      %p
+        no worries, click
+        %a#forget-password
+          = render "devise/shared/links"
+        to reset your password.
+  
+
+.copyright
+  2014 © Syncrew.

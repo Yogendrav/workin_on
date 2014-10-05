@@ -1,0 +1,66 @@
+= title("Photos")
+.portlet.box.green
+  .portlet-title
+    .caption
+      Photos
+  .portlet-body.form.form-horizontal#event_photo{role: "form"}
+    .form-body
+      = form_tag('/dashboard/photos', method: :get, remote: true) do
+        .row
+          .col-md-9.blog-page
+            .row
+              .col-md-12.article-block
+                .col-md-3
+                  = select_tag("project_id", options_for_select(select_project, params[:project_id]), class: "form-control select2-drop-down select-project", prompt: "All Projects")
+                .col-md-3
+                  = select_tag("team_id", options_for_select(select_team, params[:team_id]), class: "form-control select2-drop-down select-team", prompt: "All Teams")
+                .col-md-3
+                  = select_tag("skill_id", options_for_select(select_skill, params[:skill_id]), class: "form-control select2-drop-down select-skill", prompt: "All Skills")
+              %br
+              .col-md-12#event-photos
+                = render partial: "event_photos"
+          .col-md-3
+            .form-group
+              = label_tag :From
+              .input-group.input-medium.date.datepicker{"data-date-format"=>"mm/dd/yyyy"}
+                = text_field_tag :start_date, Date.today.strftime('%m/%d/%Y'), readonly: true, class: "form-control"
+                %span.input-group-btn
+                  %button{class: "btn default", type: "button"}
+                    %i.fa.fa-calendar
+            .form-group
+              = label_tag :To
+              .input-group.input-medium.date.datepicker{"data-date-format"=>"mm/dd/yyyy"}
+                = text_field_tag :end_date, Date.today.strftime('%m/%d/%Y'), readonly: true, class: "form-control"
+                %span.input-group-btn
+                  %button{class: "btn default", type: "button"}
+                    %i.fa.fa-calendar
+            .form-group
+              .checkbox-list.col-md-6
+                %label
+                  - if params[:event] && params[:event][:flag] == "1"
+                    = check_box_tag("event[flag", params[:event][:flag], {checked: true})
+                  - else
+                    = check_box_tag "event[flag]"
+                  Flagged
+                %label
+                  - if params[:event] && params[:event][:receipt] == "1"
+                    = check_box_tag("event[receipt", params[:event][:receipt], {checked: true})
+                  - else
+                    = check_box_tag "event[receipt]"
+                  Receipt
+                %label
+                  = check_box_tag "event_type[]", event_type_clock_in
+                  Clock-In
+                %label
+                  = check_box_tag "event_type[]", event_type_clock_out
+                  Clock-Out
+            .form-group
+              = submit_tag "Submit", class: "btn btn-primary"
+              - if @events.present?
+                = link_to "Export", export_dashboard_photos_path(params: request.query_parameters), class: "btn btn-primary"
+              = link_to "Reset",dashboard_photos_path, class: "btn btn-primary"
+
+:javascript
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });

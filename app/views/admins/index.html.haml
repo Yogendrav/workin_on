@@ -1,0 +1,34 @@
+= title("Users")
+.container
+  .row
+    .col-md-2
+      = link_to "My Profile", edit_admin_path(current_admin), class: "btn btn-sm btn-primary btn-block"
+%br
+.portlet.box.green
+  .portlet-title
+    .caption
+      All Admins
+  .portlet-body.flip-scroll
+    %table.table.table-bordered.table-striped.table-condensed.flip-content
+      %thead.flip-content
+        %tr
+          %th
+            %b Name
+          %th
+            %b Type
+          %th
+            %b Team
+          %th
+            %b Skills
+          %th
+            %b Projects
+          %th
+            Inactive
+      %tbody
+        - @users.each do |user|
+          = admin_user_row(user)
+        %tr
+          %td{colspan: 3}
+            = link_to "Add New Worker", new_worker_registration_path, class: "btn btn-sm btn-default"
+          %td{colspan: 3}
+            = link_to "Add New Admin", new_admin_registration_path, class: "btn btn-sm btn-default"

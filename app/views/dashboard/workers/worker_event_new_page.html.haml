@@ -1,0 +1,41 @@
+.portlet.box.purple
+  .portlet-title
+    .caption
+      %i.fa.fa-gift
+      Worker Event Page (Demo for creating worker's event)
+  .portlet-body.form
+    = form_for @event, url: dashboard_worker_event_create_page_path, html: {multiple: true, role: "form", class: "form-horizontal"} do |f|
+      .form-body
+        .form-group
+          %label.col-md-3.control-label Projects
+          .col-md-9
+            = f.select :project_id, current_company.projects.pluck(:name, :id), {}, class: "select2-drop-down"
+        .form-group
+          %label.col-md-3.control-label Skills
+          .col-md-9
+            = f.select :skill_id, current_company.skills.pluck(:name, :id), {}, class: "select2-drop-down"
+        .form-group
+          %label.col-md-3.control-label Event Type
+          .col-md-9
+            = f.select :event_type_id, EventType.all.pluck(:name, :id), {}, class: "select2-drop-down"
+        .form-group
+          %label.col-md-3.control-label Location
+          .col-md-9
+            = f.text_field :location
+        .form-group
+          %label.col-md-3.control-label Flag/Receipt
+          .col-md-9
+            = f.radio_button :flag, true
+            Flag
+            = f.radio_button :receipt, true
+            Receipt
+        .form-group
+          %label.col-md-3.control-label Photo
+          .col-md-9
+            = f.file_field :photo, required: true
+        .form-group
+          %label.col-md-3.control-label Worker
+          .col-md-9
+            = f.text_field :worker_id, readonly: true
+      .form-actions.right1
+        = f.submit

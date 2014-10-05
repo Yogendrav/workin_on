@@ -1,0 +1,30 @@
+%html
+  %head
+    %meta{content='text/html; charset=UTF-8' "http-equiv"=>'Content-Type'}
+  %body
+    %h3
+      Find the Worker Event Photo Details:-
+    %table{border: 1}
+      %tr
+        %td Project name:
+        %td= @event.project.name
+      %tr
+        %td Worker:
+        %td= @event.worker.name
+      %tr
+        %td Skill:
+        %td= @event.skill.name
+      %tr
+        %td Event Type:
+        %td= @event.event_type.name
+      %tr
+        %td Distance:
+        %td
+          = @event.project.active_radius
+          Miles
+      %tr
+        %td Time:
+        %td= @event.created_at.strftime("%I:%M %p")
+
+    %p Thanks
+    %p From SYNCrew

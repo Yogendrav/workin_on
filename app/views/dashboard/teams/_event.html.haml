@@ -1,0 +1,5 @@
+%tr
+  %td= link_to event.worker.name.humanize, dashboard_worker_path(event.worker.id)
+  %td= event.event_type.name.humanize
+  %td= event.project.name.humanize
+  %td= event.created_at.strftime("%d-%m-%y %H:%M:%S")

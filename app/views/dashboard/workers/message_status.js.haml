@@ -1,0 +1,9 @@
+- if @status
+  $("#alert-status").html("Message has been sent to worker.");
+  $("#alert-status").removeClass("hidden").addClass("alert-success");
+  $("#responsive").fadeOut(1500);
+  $(".modal-backdrop").fadeOut(1000);
+-else
+  $("#alert-status").html("#{message_errors(@message)}");
+  $("#alert-status").removeClass("hidden").addClass("alert-danger");
+  $("#alert-status ul").css("list-style", "none");

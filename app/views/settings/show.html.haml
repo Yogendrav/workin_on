@@ -1,0 +1,85 @@
+%p#notice= notice
+%div.container
+  .row
+    %div.col-md-4
+      %p
+        %strong hours/day:
+        = @setting.overtime_hours_day
+      %p
+        %strong hours/week:
+        = @setting.overtime_hours_week
+      %p
+        %strong Break length:
+        = @setting.break_length
+      %p
+        %strong Break time:
+        = @setting.break_time
+      %p
+        %strong Work start time:
+        = @setting.work_start_time
+      %p
+        %strong Work end time:
+        = @setting.work_end_time
+      %p
+        %strong Work time tolerance:
+        = @setting.work_time_tolerance
+      %p
+        %strong Week start day:
+        = @setting.week_start_day
+      %p
+        %strong Book travel time:
+        = @setting.book_travel_time
+    %div.col-md-4
+      %p
+        %strong Distance tolerance:
+        = @setting.distance_tolerance
+      %p
+        %strong App al breaks:
+        = @setting.app_al_breaks
+      %p
+        %strong App al schedule:
+        = @setting.app_al_schedule
+      %p
+        %strong App al ot:
+        = @setting.app_al_OT
+      %p
+        %strong App al no clock in:
+        = @setting.app_al_no_clock_in
+      %p
+        %strong App al no clock out:
+        = @setting.app_al_no_clock_out
+      %p
+        %strong Adm Overtime:
+        = @setting.adm_al_Overtime
+      %p
+        %strong No Clock-in:
+        = @setting.no_clock_in
+      %p
+        %strong Late Clock-in:
+        = @setting.late_clock_in
+    %div.col-md-4
+      %p
+        %strong Late Clock-out:
+        = @setting.late_clock_out
+      %p
+        %strong Away From Site:
+        = @setting.adm_al_away_site
+      %p
+        %strong Job Identifier:
+        = @setting.app_op_job_id
+      %p
+        %strong Miscelaneous Notes:
+        = @setting.app_op_notes
+      %p
+        %strong Flag as Important:
+        = @setting.app_op_flag
+      %p
+        %strong Flag as Receipt:
+        = @setting.app_op_recpt
+      %p
+        %strong Schedule Push:
+        = @setting.app_op_sched
+      %p
+        %strong Job Identifier Name:
+        = @setting.app_op_job_name
+    = link_to 'Edit', edit_setting_path(@setting, :with => "admins")

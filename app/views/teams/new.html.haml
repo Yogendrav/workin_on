@@ -1,0 +1,17 @@
+= title("Add Team")
+.portlet.box.green
+  .portlet-title
+    .caption
+      Create New Team
+  .portlet-body.form
+    = form_for @team, html: {class: "form-horizontal", role: "form"} do |f|
+      .form-body
+        %div
+          = render partial: 'shared/error', locals: {subject: @team, subject_name: "team"}
+        %div
+          = render partial: 'form', locals: {f: f, team: @team}
+        .form-group
+          .col-md-offset-4.col-md-1
+            =f.submit "Save", class: "btn btn-md btn-primary"
+          .col-md-1
+            =link_to "Cancel", teams_path, class: "btn btn-md btn-danger"

@@ -1,0 +1,8 @@
+.form-group
+  %label.control-label.col-md-1 Name
+  .col-md-4
+    = f.text_field :name, autocomplete: "on", class: "form-control", placeholder: "Team Name", required: true
+.form-group
+  / show the list of that worker here, which are only part of "default" team and worker must be "active"
+  .col-md-12
+    = collection_select(:assign_users, :id, assign_users, :id, :name, {selected: selected_workers(team)}, {multiple:true, size: 8, class: 'form-control'})

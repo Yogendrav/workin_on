@@ -1,0 +1,17 @@
+.portlet.box.green.tabbable
+  .portlet-title
+    .caption
+      %i.fa.fa-users
+      Teams
+  .portlet-body
+    .portlet-tabs
+      %ul.nav.nav-tabs
+        %li
+          = link_to "Subcontractors", "#portlet_tab2_2", "data-toggle"=>"tab"
+        %li.active
+          = link_to "Teams", "#portlet_tab2_1", "data-toggle"=>"tab"
+      .tab-content
+        %div{id: "portlet_tab2_1", class: "tab-pane active"}
+          = render partial: 'team', collection: @teams
+        %div{id: "portlet_tab2_2", class: "tab-pane"}
+          =# render partial: 'subcontrators(partners teams details)'

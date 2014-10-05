@@ -1,0 +1,19 @@
+%html
+  %head
+    %meta{content='text/html; charset=UTF-8' "http-equiv"=>'Content-Type'}
+  %body
+    %h3
+      Find the project shared details below:-
+    %table{border: 1}
+      %tr
+        %td Project name:
+        %td= @project_share.project.name
+      %tr
+        %td Company Name:
+        %td= @project_share.company.name
+      %tr
+        %td Company SubContractor:
+        %td= @project_share.subcontractor.company.name
+
+    %p Thanks
+    %p From SYNCrew

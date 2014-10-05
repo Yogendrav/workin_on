@@ -1,0 +1,12 @@
+.portlet.box.green
+  .portlet-title
+    .caption
+      Please Update Company Skills
+  .portlet-body.form
+    = form_for @company, :url => skill_path(@company), :method => :put do |f|
+      .form-body
+        .form-group
+          = f.collection_select :id ,selected_skills ,:id, :name,  {:selected => @selected_skill}, :class => "form-control", :multiple => true, size: 15
+        .form-group
+          .col-md-offset-6
+            = f.submit "Update", class: "btn btn-primary"

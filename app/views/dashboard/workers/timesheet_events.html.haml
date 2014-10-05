@@ -1,0 +1,70 @@
+= title("#{@worker.name.humanize} - timesheet")
+
+.col-md-12
+  .portlet.box.green
+    .portlet-title
+      .caption
+        %i.fa.fa-calendar-o
+        Review Timesheet events for #{@worker.name.humanize}
+    .portlet-body
+      .col-md-offset-1
+        .col-md-5
+          .portlet.box.green
+            .portlet-title
+              .caption
+                %i.fa.fa-calendar-o
+                Filters
+            .portlet-body
+              .col-md-offset-1
+                = form_tag dashboard_worker_timesheet_events_filter_path(@worker), class: 'role' do -
+                  = label_tag :project
+                  %br
+                  = select_tag "project", options_for_select(@worker.projects.pluck(:name, :id)), class: "input-medium select2-drop-down", prompt: "All Projects"              
+                  %br
+                  %br
+                  = label_tag :start_date
+                  .input-group.input-medium.date.datepicker{"data-date-format"=>"yyyy-mm-dd"}
+                    = text_field_tag :start_date, yyyy_mm_dd(Date.today), readonly: true, class: "form-control"
+                    %span.input-group-btn
+                      %button{class: "btn default", type: "button"}
+                        %i.fa.fa-calendar
+                  %br
+                  = label_tag :end_date
+                  .input-group.input-medium.date.datepicker{"data-date-format"=>"yyyy-mm-dd"}
+                    = text_field_tag :end_date, yyyy_mm_dd(Date.today), readonly: true, class: "form-control"
+                    %span.input-group-btn
+                      %button{class: "btn default", type: "button"}
+                        %i.fa.fa-calendar
+                  %br
+                  = submit_tag "Submit", class: 'btn btn-primary'
+
+        .col-md-5
+          .portlet.box.green
+            .portlet-title
+              .caption
+                %i.fa.fa-calendar-o
+                Quick Links
+            .portlet-body
+              .col-md-offset-2
+                %br
+                = link_to "All Projects - Yesterday", dashboard_worker_timesheet_events_filter_path(@worker, yyyy_mm_dd(DateTime.now - 1.day), "yesterday"), class: 'btn btn-default btn-lg'
+                %br
+                %br
+                %br
+                = link_to "All Projects - Last Week", dashboard_worker_timesheet_events_filter_path(@worker, yyyy_mm_dd(1.week.ago), "last-week"), class: 'btn btn-default btn-lg'
+                %br
+                %br
+                %br
+                = link_to "All Projects - Last Month", dashboard_worker_timesheet_events_filter_path(@worker, yyyy_mm_dd(1.month.ago), "last-month"), class: 'btn btn-default btn-lg'
+                %br
+                %br
+                %br
+
+      .clearfix
+      .center-content
+        = link_to "Back", dashboard_worker_path(@worker), class: "btn btn-md btn-danger"
+
+:javascript
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });

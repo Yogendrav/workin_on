@@ -1,0 +1,15 @@
+.center-content
+  = link_to "Day", dashboard_project_activity_path(project, Date.today), class: "btn btn-default active", remote: true, id: "project_activity_day"
+  = link_to "Week", dashboard_project_activity_path(project, yyyy_mm_dd(1.week.ago)), class: "btn btn-default", remote: true
+  = link_to "Month", dashboard_project_activity_path(project, yyyy_mm_dd(1.month.ago)), class: "btn btn-default", remote: true
+%br
+.row
+  / worker's whole activities goes here
+  .col-md-10.activity_photos_panel_scroller
+    .table-scrollable
+      %table.table.table-striped.table-hover
+        %tbody#project_activity
+    %br
+    .pull-right
+      = #link_to 'Next', dashboard_project_activity_path(project, Date.today, page: events.next_page), id: "add_more_acitivities", class: 'load-more-activities btn btn-default', remote: true
+.clearfix

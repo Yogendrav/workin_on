@@ -1,0 +1,35 @@
+= title("#{@worker.name.humanize} - location on map")
+
+%p.col-md-offset-1 #{@worker.name.humanize} present and past locations
+
+.col-md-12
+  .col-md-8
+    = render partial: 'map', locals: {worker_events: @events, gmap: {width: "600px", height: "500px"}}
+  .col-md-4
+    .col-md-offset-3
+      = link_to "Now", dashboard_worker_location_map_path(@worker, Date.today), class: "btn btn-md btn-primary"
+      = hidden_field_tag "worker_id", @worker.id, class: "worker_profile_datepicker"
+    %br
+    %br
+    %p Select past datetime
+    .datepicker
+    .col-md-offset-3
+      %br
+      %br
+      = link_to "Back", dashboard_worker_path(@worker), class: "btn btn-bd btn-danger"
+.clearfix
+
+:javascript
+  $(document).ready(function(){
+    full_date = #{escape_once(params[:date]).split("-")}
+
+    $('.datepicker').datepicker('update', new Date(full_date[0], parseInt(full_date[1])-1, full_date[2])).on("changeDate", function(event){
+      cal_date = event.date;
+      // if calendar date not change then break flow
+      if(cal_date == undefined){ return false;}
+      month = ("0" + (cal_date.getMonth()+1)).slice(-2);
+      day = ("0" + cal_date.getDate()).slice(-2);
+      full_date = cal_date.getFullYear()+"-"+month+"-"+day;
+      window.location = "/dashboard/workers/"+$(".worker_profile_datepicker").val()+"/location-map/"+full_date
+    });
+  });

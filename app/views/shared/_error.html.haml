@@ -1,0 +1,8 @@
+-if subject.errors.any?
+  .alert.alert-danger
+    %strong
+      = pluralize(subject.errors.count, "error")
+      prohibited this #{subject_name} from being saved:
+    %ul
+      - subject.errors.full_messages.each do |msg|
+        %li= msg

@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    = favicon_link_tag 'favicon16x16.png'
+    %title= yield(:title) || "Company-A"
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application', 'jquery.maskedinput.js'
+    = csrf_meta_tags
+  %body.login
+    = error_notifications(flash).html_safe
+    = yield
+    %br

@@ -1,0 +1,17 @@
+= title("New Task Schedule")
+
+.col-md-12
+  .portlet.box.green
+    .portlet-title
+      .caption
+        %i.fa.fa-calendar
+        Task Schedule
+    .portlet-body
+      %h4 New Calendar task for #{@worker.name.humanize}, on #{day_name(params[:date])}, #{params[:date]}
+      %br
+      = form_for @task, url: dashboard_worker_tasks_path(@worker) do |f|
+        = render partial: 'shared/error', locals: {subject: @task, subject_name: "task"}
+        = render partial: 'task', locals: {f: f}
+        = f.submit "Save", class: "btn btn-md btn-primary"
+        = link_to "Cancel", :back, class: "btn btn-md btn-danger"
+.clearfix

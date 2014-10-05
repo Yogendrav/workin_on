@@ -1,0 +1,84 @@
+= content_for :head do
+  = stylesheet_link_tag "photo.modal"
+.container
+  .row
+    %div.col-md-6.pull-left
+      = image_tag @event.photo.url, height: "400px", width: "400px"
+    %div.pull-right
+      .form-group
+        %b Worker :-
+        = @event.worker.name
+      .form-group
+        %b Skill :-
+        = @event.skill.name
+      .form-group
+        %b Project :-
+        = @event.project.name
+      .form-group
+        %b Event Type :-
+        = @event.event_type.name
+      .form-group
+        %b Distance :-
+        = @event.project.active_radius
+        Miles
+      .form-group
+        %b Time :-
+        = @event.created_at.strftime("%I:%M %p")
+      .detailBox
+        %div#all_comments
+          = render partial: "dashboard/comments/index"
+        %br
+        %div#add_comment
+          = render partial: "dashboard/comments/form", locals: {f: 'f'}
+      %br
+      %a.various{:href => "#inline", class: "btn btn-primary"} E-mail photo
+  / %br
+  / %div
+  /   %b#event_project
+  /   |
+  /   = @event.project.name
+  /   |
+  /   = @event.skill.name
+  /   |
+  /   = @event.event_type.name
+  %br
+  %div.bottom_event_photos
+    .row
+      - @events.each do |event|
+        .bottom_photos.col-sm-1.col-md-3
+          %a.fancybox{:href => event_photo_details_dashboard_photos_path(event_id: event.id), :rel => "group",'data-fancybox-type' => "iframe"}
+            = image_tag event.photo.url, size: "50x50", class: "img-rounded"
+%div#inline{style: "display:none"}
+  .container
+    %h1 Send E-mail
+    = form_tag(event_photo_details_dashboard_photos_path(event_id: @event.id), method: :get, remote: true) do
+      .row.event_photo_email
+        .form-group
+          = text_field_tag "email"
+        .form-group.col-md-2
+          = submit_tag "send", :class => "btn btn-success"
+
+
+:javascript
+
+$(document).ready(function() {
+  $(".various").fancybox({
+    maxWidth  : 800,
+    maxHeight : 600,
+    fitToView : false,
+    width   : '70%',
+    height    : '70%',
+    autoSize  : false,
+    closeClick  : false,
+    openEffect  : 'none',
+    closeEffect : 'none'
+  });
+
+  $('.fancybox-iframe').load(function(){
+    var iframe = $('.fancybox-iframe').contents();
+    iframe.find("#commenting").click(function(){
+      alert("test");
+    });
+  });
+});
+//$('.fancybox-iframe').contents().find("#comment_comment_box").val('');

@@ -1,0 +1,38 @@
+= title(" Edit #{@worker.name.humanize} - timesheet")
+
+.col-md-7
+  .portlet.box.green
+    .portlet-title
+      .caption
+        %i.fa.fa-calendar-o
+        Review Timesheet events for #{@worker.name.humanize}
+    .portlet-body
+      .col-md-offset-1
+        = form_for @event, url: dashboard_worker_update_events_timesheet_path(@worker.id, @event.id), html:{method: :put, class: 'role'} do |f|
+          = render partial: 'shared/error', locals: {subject: @event, subject_name: "event"}
+
+          = f.label :datetime
+          %br
+          .input-group.input-medium.date.form_datetime
+            = f.text_field :created_at, class: "form-control datetimepicker", readonly: true
+          %br
+          = f.label :project
+          %br
+          = f.select :project_id, options_for_select(@worker.projects.pluck(:name, :id), @event.project_id), {}, class: "input-medium select2-drop-down"
+          %br
+          %br
+          = f.submit "Submit", class: 'btn btn-primary'
+          = link_to "Cancel", dashboard_worker_timesheet_events_path(@worker), class: "btn btn-md btn-danger"
+
+      .clearfix       
+
+:javascript
+  year = "#{escape_once @event.created_at.year}"
+  month = "#{escape_once(@event.created_at.month - 1)}"
+  day = "#{escape_once @event.created_at.day}"
+  hour = "#{escape_once @event.created_at.hour}"
+  minute = "#{escape_once @event.created_at.min}"
+
+  $('.datetimepicker').datetimepicker('update', new Date(year, month, day, hour, minute), {
+    format: 'yyyy-mm-dd hh:ii'
+  });

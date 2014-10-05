@@ -1,0 +1,12 @@
+= title("#{@worker.name.humanize} - worker calendar")
+
+.col-md-12
+  .col-md-11
+    #worker-calendar
+
+  .col-md-1{style: 'height:20em;margin-top:20%;'}
+    = link_to "Push", "#push", class: 'btn btn-md btn-primary'
+.clearfix
+
+#worker-id-for-calendar.hidden
+  = @worker.id

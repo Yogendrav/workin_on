@@ -1,0 +1,78 @@
+.portlet.box.green
+  .portlet-title
+    .caption
+      Add Project
+  .portlet-body.form#project_form
+    = form_for(@project, html: {class: "form-horizontal", role: "form"}) do |f|
+      .form-body
+        -if @project.errors.any?
+          %div.errors
+            - @project.errors.full_messages.each do |msg|
+              %p= msg
+        .col-md-offset-1
+          .form-group
+            %label.control-label.col-md-3 Name
+            .col-md-5
+              - if params[:project_name].present?
+                = text_field_tag("project[name]", params[:project_name], {class: "form-control"})
+              - else
+                = f.text_field :name, class: "form-control", required: true
+            .col-md-2
+              -unless params[:action] == "new"
+                = link_to "Sharing", project_share_projects_path(project_id: "#{@project.id}"), class: "btn btn-primary"
+          .form-group
+            %label.control-label.col-md-3 Address
+            .col-md-5
+              - if params[:project_address].present?
+                = text_area_tag("project[address]", params[:project_address], {class: "form-control"})
+              - else
+                = f.text_area :address, class: "form-control", rows: 4, required: true
+            .col-md-2
+              - if params[:id].present?
+                = link_to "Location", "#address_map", class: "btn btn-primary get_address"
+              - else
+                = link_to "Location", "#address_map", class: "btn btn-primary get_new_address"
+          .form-group
+            %label.control-label.col-md-3 Active radius
+            .col-md-5
+              - if params[:active_radius].present?
+                = text_field_tag("project[active_radius]", params[:active_radius], {type: "number", min: 0, max: 2, step: 0.1, class: "form-control"})
+              - else
+                = f.text_field :active_radius, type: "number", min: 0, max: 2, step: 0.1,  class: "form-control"
+            (Miles)
+          .form-group
+            .col-md-offset-4.col-md-1
+              = f.submit "Save", class: "btn btn-primary"
+            .col-md-1
+              = link_to "Cancel", projects_path, class: "btn btn-md btn-danger"
+          = f.hidden_field :id, :value => @project.id
+
+:javascript
+
+$(document).ready(function(){
+  $('.get_address').click(function(event) {
+    event.preventDefault();
+    project_name = $("#project_name").val();
+    active_radius = $("#project_active_radius").val();
+    map_url = $('#project_address').val()
+    if (map_url != '') {
+      goUrl = "/projects/address_map?project_address="+map_url+"&project_name="+project_name+"&active_radius="+active_radius+"&project_id="+$('#project_id').val()
+      window.location = goUrl;
+    }else {
+      alert("Please Type Address")
+    }
+  });
+
+  $('.get_new_address').click(function(event) {
+    event.preventDefault();
+    project_name = $("#project_name").val();
+    active_radius = $("#project_active_radius").val();
+    map_url = $('#project_address').val()
+    if (map_url != '') {
+      goUrl = "/projects/address_map?project_address="+map_url+"&project_name="+project_name+"&active_radius="+active_radius
+      window.location = goUrl;
+    }else {
+      alert("Please Type Address")
+    }
+  });
+})

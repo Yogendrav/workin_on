@@ -1,0 +1,77 @@
+= title('Project')
+
+.col-md-12
+  .col-md-6
+    .portlet.box.green
+      .portlet-title
+        .caption
+          %i.fa.fa-gift
+          Profile
+      .portlet-body
+        .col-md-5
+          = render partial: 'project_map', locals: {project: @project, gmap: {width: "200px", height: "200px"}}
+        .col-md-7.pull-right
+          %h2
+            = @project.name
+          = @project.address
+          %div.pull-right
+            = link_to "Edit", edit_project_path(@project), class: "btn btn-success"
+          = #@worker.name.humanize
+          = #@worker.team_name.humanize
+        .col-md-4
+          =# select_tag "skills", options_from_collection_for_select(current_company.skills, :id, :name, @worker.skill_ids), {multiple: true, size: 5, class: "form-control"}
+          %b.col-md-offset-4
+          = #worker_skills(@worker)
+
+        .col-md-5
+          =# select_tag "projects", options_from_collection_for_select(current_company.projects, :id, :name, @worker.project_ids), {multiple: true, size: 5, class: "form-control"}
+          %b.col-md-offset-3
+          =# worker_projects(@worker)
+        .clearfix
+        .center-content
+          = #link_to "Edit Profile", edit_worker_path(@worker), class: "btn btn-xs btn-primary"
+
+  / showing map for worker location(this is base on project location right now, but when we able to get that from mobile gps then we use that location's coordinate)
+  .col-md-6
+    .col-md-5.col-md-offset-4{style: "margin-top: 3%;"}
+      / events.first (take last event because here in worker's events order is in descending)
+      = #render partial: 'map', locals: {project: @project, gmap: {width: "230px", height: "230px"}}
+      = #hidden_field_tag "worker_id", @worker.id, class: "worker_profile_datepicker"
+      %label Select Skill(s)
+      = select_tag "skill_id", options_for_select(select_skill), multiple: true, class: "form-control", size: 10
+    .clearfix
+    .center-content
+      = #link_to "Send Message", "#responsive", "data-toggle"=>"modal", class: "btn btn-xs btn-primary"
+      = #link_to "Edit Timesheets", dashboard_worker_timesheet_events_path(@worker), class: "btn btn-xs btn-primary"
+.clearfix
+
+/ show activities and photos of worker from events
+%br
+.col-md-12
+  .portlet.box.green
+    .portlet-title
+      .caption
+        %i.fa.fa-users
+        Activity-Photo
+    .portlet-body
+      .tabbable-custom.nav-justified
+        %ul.nav.nav-tabs.nav-justified
+          %li.active
+            = link_to "Stats", "#tab_2_1", "data-toggle"=>"tab"
+          %li
+            = link_to "Activity", "#tab_2_2", "data-toggle"=>"tab"
+          %li
+            = link_to "Photos", "#tab_2_3", "data-toggle"=>"tab"
+        .tab-content
+          %div{id: "tab_2_1", class: "tab-pane fade active in"}
+            =# render partial: 'activity', locals: {worker: @worker, events: @events}
+          .clearfix
+          %div{id: "tab_2_2", class: "tab-pane fade active in"}
+            = render partial: 'activity', locals: {project: @project, events: @events}
+          .clearfix
+          %div{id: "tab_2_3", class: "tab-pane fade activity_photos_panel_scroller"}
+            = render partial: 'photo', locals: {event_photos: @events}
+.clearfix
+
+%div.send_message
+  = #render partial: 'message_box', locals: {worker: @worker}

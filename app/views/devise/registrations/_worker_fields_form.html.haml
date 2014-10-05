@@ -1,0 +1,22 @@
+= f.label :team
+= f.select :team_id, current_company.teams_except_admins, {}, {class: "form-control"}
+
+= f.label :skills
+= select_tag "skills", options_from_collection_for_select(current_company.skills, :id, :name, resource.skill_ids), {multiple: true, size: 8, class: "form-control"}
+
+%fieldset.scheduler-border
+  %legend.scheduler-border Regular Hours
+  .col-md-5
+    = f.label :start
+    = f.text_field :working_hrs_start, class: "form-control input-medium timepicker"
+
+    = f.label :end
+    = f.text_field :working_hrs_end, class: "form-control input-medium timepicker"
+
+    = label_tag "Tolerance(min)"
+    = f.text_field :tolerance, type: "number", min: 0, max: 30, class: "form-control input-medium"
+
+:javascript
+  $("#worker_working_hrs_end").timepicker('setTime', "#{escape_once(set_timepicker_time(resource.working_hrs_end))}")
+  
+  $("#worker_working_hrs_start").timepicker('setTime', "#{escape_once(set_timepicker_time(resource.working_hrs_start))}")

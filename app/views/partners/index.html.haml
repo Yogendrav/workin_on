@@ -1,0 +1,30 @@
+= title("Partners")
+
+.portlet.box.green
+  .portlet-title
+    .caption
+      Partners
+  .portlet-body.flip-scroll
+    %table.table.table-bordered.table-striped.table-condensed.flip-content
+      %thead.flip-content
+        %tr
+          %th
+            %b Name
+          %th
+            %b Workers
+          %th
+            %b Status
+          %th
+            %b Disable
+        %tbody
+          - @partners.each do |partner|
+            %tr
+              %td
+                = partner.subcontractor.company.name
+              %td
+                = partner.subcontractor.company.workers.size
+              %td
+                = partner.status ? "Enabled" : "Pending"
+              %td
+                = link_to "Delete", partner, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger"
+    = link_to "Add New Partner", new_partner_path, class: "btn btn-sm btn-default"

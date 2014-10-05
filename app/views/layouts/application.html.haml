@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    = favicon_link_tag 'favicon16x16.png'
+    / after login put company name then page name
+    %title= yield(:title) || "Company-A"
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body.page-header-fixed.page-quick-sidebar-over-content
+    .page-container
+      = render "shared/sidebar" unless(request.path.include?("dashboard") || request.path == root_path)
+      .page-content-wrapper
+        - if(request.path.include?("dashboard") || request.path == root_path)
+          .page-content.hide_sidebar
+            = error_notifications(flash).html_safe
+            = yield
+        -else
+          .page-content
+            = error_notifications(flash).html_safe
+            = yield
+    #header.navbar.navbar-default.navbar-fixed-top
+      = render "shared/header"
+    .page-footer
+      = render "shared/footer"
+    %br

@@ -1,0 +1,17 @@
+= title("Edit Team")
+
+.portlet.box.green
+  .portlet-title
+    .caption
+      Update Team
+  .portlet-body.form
+    = form_for @team, html: {method: :put, class: "form-horizontal", role: "form"} do |f|
+      .form-body
+        %div
+          = render partial: 'shared/error', locals: {subject: @team, subject_name: "team"}
+        %div
+          = render partial: 'form', locals: {f: f, team: @team}
+        .form-group
+          .col-md-offset-5.col-md-2
+            =f.submit "Save", class: "btn btn-md btn-primary"
+            =link_to "Cancel", teams_path, class: "btn btn-md btn-danger"

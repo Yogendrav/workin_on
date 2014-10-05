@@ -1,0 +1,13 @@
+.portlet.box.green
+  .portlet-title
+    .caption
+      Please Select Company Skills
+  .portlet-body.form
+    = form_for @skill, html: {class: "form-horizontal"} do |f|
+      .form-body
+        .form-group
+          .col-md-12
+            = f.select :id, options_for_select(select_company_skills), {}, :multiple => true, :class => "form-control", :size => 15, id: "company_skill"
+        .form-group
+          .col-md-offset-6
+            = f.submit "Save", class: "btn btn-primary"

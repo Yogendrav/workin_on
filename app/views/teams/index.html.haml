@@ -1,0 +1,27 @@
+= title("Teams")
+
+.portlet.box.green
+  .portlet-title
+    .caption
+      All Teams
+  .portlet-body.flip-scroll
+    %table.table.table-bordered.table-striped.table-condensed.flip-content
+      %thead.flip-content
+        %tr
+          %th
+            %b Team
+          %th
+            %b Members
+          %th
+            %b Projects
+          %th
+      %tbody
+        - @teams.each do |team|
+          %tr
+            %td= team.admin_team? ? team.name.humanize : link_to(team.name.humanize, edit_team_path(team))
+            %td= members_count(team)
+            %td= projects_count(team)
+            %td= disable_team_button(team)
+        %tr
+          %td{colspan: 4}
+            = link_to "Add new Team", new_team_path, class: "btn btn-sm btn-default"

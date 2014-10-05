@@ -1,0 +1,11 @@
+%script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=initialize", type: 'text/javascript'}
+
+:javascript
+  function initialize(){
+    addresses = "#{project_location(project)}";
+    map = document.getElementById('map_canvas');
+    projectLocationMapWithHighlightedArea(map, addresses);
+  }
+
+
+%div{id: "map_canvas", style: "height: #{gmap[:height]}; width:#{gmap[:width]};"}

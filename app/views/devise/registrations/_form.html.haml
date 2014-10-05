@@ -1,0 +1,22 @@
+%div.upload-preview
+  / profile image preview
+  = image_tag user.photo.url(:thumb), size: "100x90", class: "img-rounded"
+  %br
+  = link_to "Upload", "#", "data-toggle"=>"modal", class: "btn btn-md btn-primary", "data-target"=>"#upload_photo_model"
+%div
+  = f.label :name
+  = f.text_field :name, autofocus: true, class: "form-control", placeholder: "Name", required: true
+
+%div
+  = f.label :email
+  = f.email_field :email, class: "form-control", placeholder: "Email address", required: true
+
+- if params[:action] == 'new' || params[:action] == 'create'
+  = render partial: 'devise/registrations/password_form', locals: {f: f}
+
+%div
+  = f.label :phone
+  = f.phone_field :phone, class: "form-control", placeholder: "(510) 555-5555", required: true
+
+%div.photo_dialog
+  = render partial: "devise/registrations/photo_upload_form", locals: {f: f}

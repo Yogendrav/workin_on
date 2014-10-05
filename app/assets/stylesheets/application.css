@@ -1,0 +1,126 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require fullcalendar
+ *= require font-awesome
+ *= require_tree ./fancybox
+ */
+
+fieldset.scheduler-border {
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  margin: 0 0 1.5em 0 !important;
+  -webkit-box-shadow:  0px 0px 0px 0px #000;
+          box-shadow:  0px 0px 0px 0px #000;
+  width: 300px;
+}
+
+legend.scheduler-border {
+  width:inherit;
+  padding:0 10px;
+  border-bottom:none;
+  font-size: 13px;
+}
+
+div.fileupload{
+  width: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+div.fileupload input{
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  opacity: 0.0;
+  filter: alpha(opacity = 0);
+}
+
+#admin-sidebar {
+  height: 100%;
+  float: left;
+  border-right: 1px solid #e7e7e7;
+}
+
+.t-margin{
+  margin-top: 5%;
+}
+
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 0;
+}
+.the-fieldset {
+    border: 2px groove threedface #444;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+    border-radius: 0 !important;
+}
+
+#gmaps-canvas {
+  height: 400px;
+  border: 1px solid #999;
+  -moz-box-shadow:    0px 0px 5px #ccc;
+  -webkit-box-shadow: 0px 0px 5px #ccc;
+  box-shadow:         0px 0px 5px #ccc;
+}
+
+#gmaps-error {
+  color: #cc0000;
+}
+
+#results {
+  color: #555;
+  padding-top: 10px;
+}
+
+#input input {
+  width: 40%;
+}
+#input #gmaps-output-latitude, #input #gmaps-output-longitude {
+  color: green;
+}
+
+.download { float: right; }
+
+.center-content {
+  display: block;
+  margin-left: 40%;
+}
+
+.activity_photos_panel_scroller{
+  height: 250px;
+  overflow-y: auto;
+}
+
+.rt-margin{
+  margin-top: 1%;
+  margin-right: 2.5%;
+}
+.photos_section {
+  height: 180px !important;
+  width: 100%;
+}
+
+.display-message {
+  border: 1px solid #35aa47;
+  text-align: center;
+  margin-left: 30px;
+}
+
+.hide_sidebar { margin-left: 0px !important;}

@@ -1,0 +1,9 @@
+$(".center-content a").removeClass('active');
+- if @events.present?
+  var uri = "#{dashboard_project_activity_path(@events.first.worker, yyyy_mm_dd(params[:date]))}"
+  $(".row").show();
+  // $("#add_more_project_acitivities").attr("href", uri);
+  $("tbody#project_activity").html("#{j(render partial: 'dashboard/projects/event', collection: @events)}");
+  $("tbody#project_short_activity").html("#{short_activity(@events)}");
+- else
+  $(".row").hide();

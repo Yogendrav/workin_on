@@ -1,0 +1,19 @@
+.titleBox
+  %label Comment Box
+.actionBox
+  %ul.commentList
+    - Comment.all.map do |comment|
+      %li.content_box
+        %div.left_box
+          .commenterImage
+            = image_tag "missing.jpeg"
+            %p
+              = current_admin.name
+          .commentText
+            %p
+            = truncate comment.comment_box
+        %div.right_box
+          %span.date.sub-text
+            = distance_of_time_in_words_to_now(comment.created_at)
+          = link_to dashboard_comment_path(comment), method: :delete, data: {confirm: "Are you confirm"}, class: "btn btn-xs bt-danger", remote: true do
+            %i.fa.fa-trash

@@ -1,0 +1,5 @@
+$('.event_photos').append('#{j(render partial: "shared/event_photo", collection: @events)}');
+$('a.load-more-photos').attr('href', '#{dashboard_worker_path page: @events.next_page}');
+ 
+- unless @events.next_page
+	$('a.load-more-photos').remove();

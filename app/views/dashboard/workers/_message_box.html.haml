@@ -1,0 +1,20 @@
+%div{id: "responsive", class: "modal fade", tabindex: "-1", "aria-hidden"=> true}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: "button", class: "close", "data-dismiss"=>"modal", "aria-hidden"=>"true"}
+        %h4.modal-title
+          Send Message to #{worker.name.humanize}
+      .modal-body
+        %div{class: "scroller", style: "height:300px", "data-always-visible"=> "1", "data-rail-visible1"=>"1"}
+          .center-block
+            %p
+              %b Type message here
+            = form_for current_admin.messages.new, url: dashboard_worker_send_message_path(worker), remote: true do |f|
+              .Metronic-alerts.alert.fade.in.hidden{id: "alert-status"}
+                %button{"aria-hidden"=>true, "data-dismiss"=>"alert", class: "close"}
+              = f.text_area :notes, size: "35x12", class: "form-control", placeholder: "Enter your message..."
+          .clearfix
+      .modal-footer
+        = link_to "Save", "#", onclick: "$('#new_message').submit();", class: "btn green"
+        = link_to "Cancel", "#", "data-dismiss"=>"modal", class: "btn default"

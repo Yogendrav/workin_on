@@ -1,0 +1,183 @@
+.portlet.box.green
+  .portlet-title
+    .caption
+      Company Setting
+  .portlet-body.form
+    = form_for @setting, html: {class: "form-horizontal"} do |f|
+      .form-body
+        %div
+          = render partial: 'shared/error', locals: {subject: @setting, subject_name: "setting"}
+        %div.row
+          %div.col-md-12
+            %fieldset.well.the-fieldset
+              %legend.the-legend Overtime
+              .col-md-offset-1.col-md-12
+                %div.pull-left.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 hours/day
+                    .col-md-5
+                      = f.text_field :overtime_hours_day, :class => "form-control input-small", :placeholder => "min"
+                %div.pull-right.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 hours/week
+                    .col-md-5
+                      = f.text_field :overtime_hours_week, :class => "form-control input-small", :placeholder => "min"
+            %fieldset.well.the-fieldset
+              %legend.the-legend Breaks
+              .col-md-offset-1.col-md-12
+                %div.pull-left.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 Minutes Every
+                    .col-md-5
+                      = f.text_field :break_length, :class => "form-control input-small", :placeholder => "min"
+                %div.pull-right.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 Hours
+                    .col-md-5
+                      = f.text_field :break_time, :class => "form-control input-small", :placeholder => "min"
+            %fieldset.well.the-fieldset
+              %legend.the-legend Time
+              .col-md-offset-1.col-md-12
+                %div.pull-left.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 Start
+                    .col-md-3
+                      .input-group
+                        = f.text_field :work_start_time, class: 'input-small form-control timepicker'
+                  .form-group
+                    %label.control-label.col-md-3 Tolerance
+                    .col-md-5
+                      = f.text_field :work_time_tolerance, :type => "number", :min => 0, :max => 60, :class => "form-control"
+                  .form-group
+                    %label.control-label.col-md-3 Book Travel Time to
+                    .col-md-5
+                      = f.select :book_travel_time, options_for_select([["Task Ending", "Task Ending"],["Task Starting", "Task Starting"], ["Don't Book", "Don't Book"]]),{}, :class => "form-control"
+                %div.pull-right.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 End
+                    .col-md-3
+                      .input-group
+                        = f.text_field :work_end_time, class: 'input-small form-control timepicker'
+                  .form-group
+                    %label.control-label.col-md-3 Week Start
+                    .col-md-5
+                      = f.select :week_start_day, options_for_select([["Monday", "Monday"],["Tuesday", "Tuesday"],["Wednesday", "Wednesday"], ["Thursday", "Thursday"],["Friday", "Friday"],["Saturday", "Saturday"]]),{}, :class => "form-control"
+            %fieldset.well.the-fieldset
+              %legend.the-legend Distance
+              .col-md-offset-1.col-md-12
+                %div.pull-left.col-md-6
+                  .form-group
+                    %label.control-label.col-md-3 Tolerance
+                    .col-md-4
+                      = f.text_field :distance_tolerance, :type => "number", :min => 0, :max => 100, :class => "form-control input-small"
+                %div.pull-right.col-md-6
+                  .form-group
+                    %label.col-md-3 GPS Check
+                    .input-group
+                      %span.input-group-addon
+                        = f.check_box :gps_check
+                      = f.text_field :gps_occurrence, :class => "form-control input-small", :placeholder => "min"
+            %fieldset.well.the-fieldset
+              %legend.the-legend App Alerts
+              .col-md-offset-2.col-md-10
+                %div.pull-left.col-md-6
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :app_al_breaks
+                        Breaks
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :app_al_schedule
+                        Schedule
+                  .form-group
+                    %label.col-md-3 Overtime
+                    .input-group
+                      %span.input-group-addon
+                        = f.check_box :app_al_OT
+                      = f.text_field :app_al_OT_occurrence, :class => "form-control input-small", :placeholder => "min"
+                %div.pull-right.col-md-6
+                  .form-group
+                    %label.col-md-4 No Clock-in
+                    .input-group
+                      %span.input-group-addon
+                        = f.check_box :app_al_no_clock_in
+                      = f.text_field :app_al_no_clock_in_occurrence, :class => "form-control input-small", :placeholder => "min"
+                  .form-group
+                    %label.col-md-4 No Clock-out
+                    .input-group
+                      %span.input-group-addon
+                        = f.check_box :app_al_no_clock_out
+                      = f.text_field :app_al_no_clock_out_occurrence, :class => "form-control input-small", :placeholder => "min"
+                  .form-group
+                    %label.col-md-4 Off-site
+                    .input-group
+                      %span.input-group-addon
+                        = f.check_box :app_off_site
+                      = f.text_field :app_off_site_occurrence, :class => "form-control input-small", :placeholder => "min"
+            %fieldset.well.the-fieldset
+              %legend.the-legend Admin Alerts
+              .col-md-offset-2.col-md-8
+                %div.pull-left
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :adm_al_Overtime
+                        Overtime
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :no_clock_in
+                        No Clock-in
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :late_clock_in
+                        Late Clock-in
+                %div.pull-right
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :late_clock_out
+                        Late Clock-out
+                  .form-group
+                    .checkbox-list
+                      %label
+                        = f.check_box :adm_al_away_site
+                        Away From Site
+            %fieldset.well.the-fieldset
+              %legend.the-legend App Options
+              .col-md-offset-2.col-md-4
+                .form-group
+                  .checkbox-list
+                    %label
+                      = f.check_box :app_op_job_id
+                      Job Identifier
+                .form-group
+                  .checkbox-list
+                    %label
+                      = f.check_box :app_op_notes
+                      Miscelaneous Notes
+                .form-group
+                  .checkbox-list
+                    %label
+                      = f.check_box :app_op_flag
+                      Flag as Important
+                .form-group
+                  .checkbox-list
+                    %label
+                      = f.check_box :app_op_recpt
+                      Flag as Receipt
+                .form-group
+                  .checkbox-list
+                    %label
+                      = f.check_box :app_op_sched
+                      Schedule Push
+                .form-group
+                  %label.control-label Job Identifier Name
+                  .col-sm-5
+                    = f.text_field :app_op_job_name, :class => "form-control"
+            .action
+              .col-md-offset-5
+                = f.submit "Save", :class => "btn btn-primary"

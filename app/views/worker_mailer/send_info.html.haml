@@ -1,0 +1,32 @@
+%html
+  %head
+    %meta{content='text/html; charset=UTF-8' "http-equiv"=>'Content-Type'}
+  %body
+    Hi #{@worker.name},
+    %p
+      Find the account details below:-
+      %table{border: 1}
+        %tr
+          %td Your username is:
+          %td= @worker.email
+        %tr
+          %td Your phone number is:
+          %td= @worker.phone
+        %tr
+          %td Your team name is:
+          %td= @worker.team_name
+        %tr
+          %td Skills is:
+          %td= @worker.skills.map(&:name).join(", ")
+        %tr
+          %td Your regular hour start time is:
+          %td= @worker.working_hrs_start.strftime("%H:%M:%p")
+        %tr
+          %td Your regular hour end time is:
+          %td= @worker.working_hrs_end.strftime("%H:%M:%p")
+        %tr
+          %td Your regular tolerance minutes is:
+          %td= @worker.tolerance
+
+    %p Thanks
+    %p From SYNCrew

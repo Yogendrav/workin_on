@@ -1,0 +1,20 @@
+= title("Partner Invitation")
+.portlet.box.green
+  .portlet-title
+    .caption
+      Invite
+  .portlet-body.form
+    = form_for(@partner, html: {class: "form-horizontal", role: "form"}) do |f|
+      .form-body
+        %div
+          = render partial: 'shared/error', locals: {subject: @partner, subject_name: "partner"}
+        .col-md-offset-1
+          .form-group
+            %label.control-label.col-md-3 e-mail of primary contact
+            .col-md-5
+              = f.text_field :email, class: "form-control"
+          .form-group
+            .col-md-offset-2.col-md-2
+              = f.submit "Send invite", class: "btn btn-primary"
+            .col-md-1
+              = link_to "Cancel", partners_path, class: "btn btn-md btn-danger"

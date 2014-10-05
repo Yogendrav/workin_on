@@ -1,0 +1,25 @@
+= title("Projects")
+
+.portlet.box.green
+  .portlet-title
+    .caption
+      All Projects
+  .portlet-body.flip-scroll
+    %table.table.table-bordered.table-striped.table-condensed.flip-content
+      %thead.flip-content
+        %tr
+          %th
+            %b Name
+          %th
+            %b Workers
+
+        %tbody
+          - @projects.each do |project|
+            %tr
+              %td
+                = link_to(project.name.humanize, edit_project_path(project))
+              %td
+                = project.company.workers.size
+              %td
+                = link_to "Delete", project, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-xs btn-danger"
+    = link_to "Add New Project", new_project_path, class: "btn btn-sm btn-default"

@@ -1,0 +1,17 @@
+%script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=initialize", type: 'text/javascript'}
+
+:javascript
+  function initialize(){
+    addresses = #{events_locations(worker_events)};
+    map = document.getElementById('map_canvas');
+
+    if(addresses.length == 1){
+      path = "#{dashboard_worker_location_map_path(worker_events.worker, Date.today) if worker_events.try(:worker) }"
+      workerProfileMap(map, addresses, path);
+    }else{
+      workerLocationMapWithHighlightedArea(map, addresses);
+    }
+  }
+
+
+%div{id: "map_canvas", style: "height: #{gmap[:height]}; width:#{gmap[:width]};"}

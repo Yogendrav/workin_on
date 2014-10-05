@@ -1,0 +1,60 @@
+<div class="portlet box purple ">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-gift"></i> Worker Event Page (Demo for creating worker's event)
+    </div>
+  </div>
+  <div class="portlet-body form">
+    <%= form_for @event, url: dashboard_worker_event_create_page_path, html: {multiple: true, role: "form", class: "form-horizontal"} do |f| %>
+      <div class="form-body">
+        <div class="form-group">
+          <label class="col-md-3 control-label">Projects</label>
+          <div class="col-md-9">
+            <%= f.select :project_id, current_company.projects.pluck(:name, :id) %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Skills</label>
+          <div class="col-md-9">
+            <%= f.select :skill_id, current_company.skills.pluck(:name, :id) %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Event Type</label>
+          <div class="col-md-9">
+            <%= f.select :event_type_id, EventType.all.pluck(:name, :id) %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Location</label>
+          <div class="col-md-9">
+            <%= f.text_field :location %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Flag/Receipt</label>
+          <div class="col-md-9">
+            <%= f.radio_button :flag, true %>Flag
+            <%= f.radio_button :receipt, true %>Receipt
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Photo</label>
+          <div class="col-md-9">
+            <%= f.file_field :photo %>
+          </div>
+        </div>
+
+         <div class="form-group">
+          <label class="col-md-3 control-label">Worker</label>
+          <div class="col-md-9">
+            <%= f.text_field :worker_id, readonly: true %>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions right1">
+      <%= f.submit %>
+      </div>
+    <%end%>
+  </div>
+</div>

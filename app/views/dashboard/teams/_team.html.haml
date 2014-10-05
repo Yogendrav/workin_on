@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      %a{href: "#collapse_3_#{team.id}", "data-parent"=>"#accordion3", "data-toggle"=>"collapse", class: "accordion-toggle accordion-toggle-styled collapsed"}= team.name.humanize
+  .panel-collapse.collapse{id: "collapse_3_#{team.id}"}
+    .panel-body
+      .table-responsive
+        %table.table
+          %tbody
+            - team.workers.each do |worker|
+              = render partial: 'event', collection: two_days_ago_events(worker)

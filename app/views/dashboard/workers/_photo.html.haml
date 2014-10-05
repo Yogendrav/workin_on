@@ -1,0 +1,8 @@
+.col-md-11.col-md-offset-1
+  .event_photos
+    - event_photos.each do |event_photo|
+      = link_to(image_tag(event_photo.photo.url(:thumb), size: "160x140", class: "img-rounded rt-margin"), "#show_image_on_image_overlay")
+  %br
+  .col-md-offset-4
+    = link_to 'Load More Photos', dashboard_worker_path(page: event_photos.next_page), class: 'load-more-photos btn btn-default', remote: true if event_photos.next_page
+.clearfix

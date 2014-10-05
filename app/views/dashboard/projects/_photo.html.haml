@@ -1,0 +1,11 @@
+.col-md-11.col-md-offset-1
+  .event_photos
+    - event_photos.each do |event_photo|
+      %a.fancybox{:href => "#{image_path(event_photo.photo.url)}", :rel => "group"}
+        = image_tag event_photo.photo.url(:thumb), size: "160x140", class: "img-rounded rt-margin"
+
+:javascript
+  $(".fancybox").fancybox({
+    openEffect  : 'none',
+    closeEffect : 'none'
+  });

@@ -1,0 +1,27 @@
+%br
+.row
+  - if @events.present?
+    - @events.each do |event|
+      .col-xs-6.col-md-3
+        - if event.photo
+          %br
+          %a.fancybox{:href => event_photo_details_dashboard_photos_path(event_id: event.id), :rel => "group",'data-fancybox-type' => "iframe"}
+            = image_tag event.photo.url, class: "photos_section img-rounded"
+        -else
+          = image_tag "event_missing.png", class: "photos_section example-image img-rounded"
+  - else
+    .display-message.col-md-10
+      No Record Found
+= will_paginate @events
+
+:javascript
+$(document).ready(function(){
+  $(".pagination a").click(function(){
+    $.getScript(this.href);
+    return false
+  });
+  $(".fancybox").fancybox({
+    openEffect  : 'none',
+    closeEffect : 'none'
+  });
+})
